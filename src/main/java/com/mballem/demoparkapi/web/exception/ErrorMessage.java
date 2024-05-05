@@ -3,7 +3,6 @@ package com.mballem.demoparkapi.web.exception;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.ToString;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -21,7 +20,7 @@ public class ErrorMessage {
     private int status;
     private String statusText;
     private String message;
-    private Map<String, Strings> errors;
+    private Map<String, String> errors;
 
     public ErrorMessage(){
 
