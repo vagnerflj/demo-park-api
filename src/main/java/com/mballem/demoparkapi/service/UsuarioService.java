@@ -1,6 +1,6 @@
 package com.mballem.demoparkapi.service;
 
-import com.mballem.demoparkapi.entity.Usuario;
+import com.mballem.demoparkapi.Usuario;
 import com.mballem.demoparkapi.exception.EntityNotFoundException;
 import com.mballem.demoparkapi.exception.PasswordInvalidException;
 import com.mballem.demoparkapi.exception.UsernameUniqueViolationException;
