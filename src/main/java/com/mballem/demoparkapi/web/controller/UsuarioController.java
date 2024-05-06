@@ -8,6 +8,7 @@ import com.mballem.demoparkapi.web.dto.UsuarioSenhaDto;
 import com.mballem.demoparkapi.web.dto.mapper.UsuarioMapper;
 import com.mballem.demoparkapi.web.exception.ErrorMessage;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Tag(name = "Usuarios", description = "Contém todas as operações relativas aos recursos para cadastro, edição e leitura de um usuário.")
@@ -70,9 +72,17 @@ public class UsuarioController {
         Usuario user = usuarioService.editarSenha(id, dto.getSenhaAtual(), dto.getNovaSenha(), dto.getConfirmaSenha());
         return ResponseEntity.noContent().build();
     }
+    @Operation(summary = "Lista todos os usuários cadastrados", description = "Lista todos os usuários cadastrados",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Lista com todos os usuários cadastrados",
+                            content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = UsuarioResponseDto.class))))
+            })
+
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDto>> getAll(){
         List<Usuario> users = usuarioService.buscarTodos();
         return ResponseEntity.ok(UsuarioMapper.toListDto(users));
     }
+
 }
