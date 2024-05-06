@@ -2,6 +2,7 @@ package com.mballem.demoparkapi.service;
 
 import com.mballem.demoparkapi.entity.Usuario;
 import com.mballem.demoparkapi.exception.EntityNotFoundException;
+import com.mballem.demoparkapi.exception.PasswordInvalidException;
 import com.mballem.demoparkapi.exception.UsernameUniqueViolationException;
 import com.mballem.demoparkapi.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,12 +36,12 @@ public class UsuarioService {
     @Transactional
     public Usuario editarSenha(Long id, String senhaAtual, String novaSenha, String confirmaSenha) {
         if(!novaSenha.equals(confirmaSenha)){
-            throw new RuntimeException("Nova senha não confere com confirmação de senha.");
+            throw new PasswordInvalidException("Nova senha não confere com confirmação de senha.");
         }
 
         Usuario user = buscarPorId(id);
         if(!user.getPassword().equals(senhaAtual)){
-            throw new RuntimeException("Sua senha não confere.");
+            throw new PasswordInvalidException("Sua senha não confere.");
         }
 
         user.setPassword(novaSenha);
