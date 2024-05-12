@@ -21,7 +21,7 @@ public class JwtUtils {
     public static final String SECRET_KEY = "0123456789-0123456789-0123456789";
     public static final long EXPIRE_DAYS = 0;
     public static final long EXPIRE_HOURS = 0;
-    public static final long EXPIRE_MINUTES = 2;
+    public static final long EXPIRE_MINUTES = 30;
 
     private JwtUtils(){
     }
@@ -54,7 +54,7 @@ public class JwtUtils {
 
     private static Claims getClaimsFromToken(String token) {
         try {
-            return Jwts.parser()
+            return Jwts.parserBuilder()
                     .setSigningKey(generateKey()).build()
                     .parseClaimsJws(refactorToken(token)).getBody();
         } catch (JwtException ex) {
@@ -69,7 +69,7 @@ public class JwtUtils {
 
     public static boolean isTokenValid(String token) {
         try {
-            Jwts.parser()
+            Jwts.parserBuilder()
                     .setSigningKey(generateKey()).build()
                     .parseClaimsJws(refactorToken(token));
             return true;
