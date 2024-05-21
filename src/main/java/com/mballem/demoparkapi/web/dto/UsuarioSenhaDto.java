@@ -10,13 +10,13 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 public class UsuarioSenhaDto {
-    @NotBlank
-    @Size(min = 6, max = 6)
+    @NotBlank(message = "{NotBlank.usuarioSenhaDto.senhaAtual}")
+    @Size(min = 6, max = 6, message = "{Size.usuarioSenhaDto.senhaAtual}")
     private String senhaAtual;
-    @NotBlank
-    @Size(min = 6, max = 6)
+    @NotBlank(message = "{NotBlank.usuarioSenhaDto.novaSenha}")
+    @Size(min = 6, max = 6, message = "{Size.usuarioSenhaDto.novaSenha}")
     private String novaSenha;
-    @NotBlank
-    @Size(min = 6, max = 6)
+    @NotBlank(message = "{NotBlank.usuarioSenhaDto.confirmaSenha}")
+    @Size(min = 6, max = 6, message = "{Size.usuarioSenhaDto.confirmaSenha}")
     private String confirmaSenha;
 }
